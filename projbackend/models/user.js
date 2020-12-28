@@ -40,9 +40,9 @@
    purchases:{
        type:Array,
        default:[],
-   }
+   },
 
-  });
+  },{timestamps: true});
 
 
   userSchema.virtuals("password")
