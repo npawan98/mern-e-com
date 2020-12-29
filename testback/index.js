@@ -16,14 +16,27 @@ const admin = (req,res) =>{
 //middleware
 const middleware = (req,res,next) =>{
     // return res.send(" this is middleware")
-    console.log("this is middleware");
+    console.log("this is middleware")
     next(); 
     
 }
-
-
 app.get("/admin",middleware,admin)
 
+
+
+
+
+const middle = (req,res) =>{
+    return res.send("testing middleware")
+}
+//middleware
+const midware = (req,res,next) =>{
+    // return res.send(" this is middleware")
+    console.log("accessed")
+    next(); 
+    
+}
+app.get("/middle",midware,middle)
 
 
 app.get("/login",(req,res)=>{
