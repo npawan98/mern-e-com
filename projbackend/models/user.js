@@ -5,7 +5,7 @@
   const uuidv1 = require('uuid/v1');
 
 
-  const userSchema = new.mongoose.Schema({
+  const userSchema = new mongoose.Schema({
    name:{
        type: String,
        required:true,
@@ -45,7 +45,7 @@
   },{timestamps: true});
 
 
-  userSchema.virtuals("password")
+  userSchema.virtual("password")
   .set(function(password){
       this._password = password;  // here _ is used for private variable
       this.salt = uuidv1();
@@ -54,8 +54,6 @@
   .get(function(){
       return this._password
   })
-
-
 
 
   //methods
