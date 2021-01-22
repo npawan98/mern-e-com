@@ -88,10 +88,32 @@ exports.signout = (req,res)=>{
 
 exports.isSignedIn = expressJwt({
     secret: process.env.SECRET,
-    userProperty: "auth"
+    userProperty: "auth"  //it gives to id(user) back (go auth.js (route), basically it sends the response back )
 });
 
 
 
 
 // custom middlewares
+
+exports.isAuthenticated = (req,res,next) =>{
+
+    let checker = req.profile && req.auth && req.profile._id === req.auth._id; //front end == backend 
+    if(!checker){
+        return res.status(403).json({
+            error:"ACCESS DENIED"
+        });
+    }
+    next();
+}
+
+exports.isAdmin = (req,res,next) =>{
+//for isadmin we are checking the role which we have setted in models
+if(req.profile.role === 0){
+    return res.status(403).json({
+        error:"You are not ADMIN, ACCESS DENIED"
+    })
+
+}
+    next();
+}
